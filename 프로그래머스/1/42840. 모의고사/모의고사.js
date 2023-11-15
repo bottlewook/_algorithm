@@ -17,14 +17,9 @@ function solution(answers) {
     
     let newArr = [answer1, answer2, answer3];
     let max = Math.max(...newArr)
-    const map = new Map();
     
     for (let i = 0; i < newArr.length; i++) {
-        map.set(i + 1, newArr[i])
-    }
-    
-    for (let [key, value] of map) {
-        if (max === value) answer.push(key)
+        if (newArr[i] === max) answer.push(i + 1)
     }
     
     return answer;
