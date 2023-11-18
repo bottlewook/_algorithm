@@ -17,8 +17,8 @@ function solution(msg) {
             dictionary[nextWord] = count;
             count++
             answer.push(dictionary[currentWord])
-            // currentWord = nextWord[nextWord.length - 1]
-            currentWord = msg[lt]
+            currentWord = nextWord[nextWord.length - 1]
+            // currentWord = msg[lt]
         } else {
             currentWord = nextWord
         }
