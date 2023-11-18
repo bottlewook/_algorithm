@@ -1,21 +1,37 @@
 function solution(N, stages) {
     var answer = [];
-    
-    let map = new Map();
-    
+    const stageMap = new Map();
     for (let stage of stages) {
-        if (map.has(stage)) map.set(stage, map.get(stage) + 1);
-        else map.set(stage, 1);
+        if (stage > N) continue;
+        if (stageMap.has(stage)) stageMap.set(stage, stageMap.get(stage) + 1)
+        else stageMap.set(stage, 1);
+    };
+    
+    for (let i = 1; i <= N; i++) {
+        if (!stageMap.has(i)) stageMap.set(i, 0)
     }
     
-    let arr = [];
+    const stageMapArr = [...stageMap];
     
-    for (let [key, value] of map) {
-        arr.push([key, value])
+    stageMapArr.sort((a, b) => a[0] - b[0])
+    
+    const sortedStageMap = new Map(stageMapArr)
+    
+    let people = stages.length
+    const scoreMap = new Map();
+    
+    for (let [key, value] of sortedStageMap) {
+        scoreMap.set(key, value / people);
+        people -= value;
     }
     
-    arr.sort((a, b) => b[0] - a[0]);
+    const scoreMapArr = [...scoreMap];
+    scoreMapArr.sort((a, b) => {
+        if (a[1] === b[1]) return a[0] - b[0];
+        else return b[1] - a[1]
+    })
     
-    console.log(arr)
-    return answer;
+    answer = scoreMapArr.map(score => score[0])
+    
+    return answer
 }
