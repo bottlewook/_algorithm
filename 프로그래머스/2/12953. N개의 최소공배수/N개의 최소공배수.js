@@ -1,6 +1,6 @@
 function 최소공배수(a, b) {
-    if (b % a === 0) return b
     let c = b % a
+    if (c === 0) return b;
     while (a % c) {
         c = a % c
     }
@@ -8,13 +8,14 @@ function 최소공배수(a, b) {
     return a * b / c
 }
 
+
 function solution(arr) {
-    arr.sort((a, b) => a - b)
-    while (arr.length >= 2) {
-        let b = arr.pop();
-        let a = arr.pop();
-        arr.push(최소공배수(a, b))
+    arr.sort((a, b) => a - b);
+    while (arr.length > 1) {
+        let first = arr.pop();
+        let second = arr.pop();
+        arr.push(최소공배수(second, first))
     }
     
-   return arr[0]
+    return arr[0]
 }
