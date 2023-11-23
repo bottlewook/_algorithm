@@ -1,29 +1,28 @@
 function solution(k, tangerine) {
-    let answer = 1;
-    let map = new Map();
+    let answer = 0;
     
-    for (let x of tangerine) {
-        if (!map.get(x)) {
-            map.set(x, 1)
+    const map = new Map();
+    
+    for (let i = 0; i < tangerine.length; i++) {
+        if (map.has(tangerine[i])) {
+            map.set(tangerine[i], map.get(tangerine[i]) + 1)
         } else {
-            map.set(x, map.get(x) + 1)
+            map.set(tangerine[i], 1)
         }
     }
     
-    let temp = []
+    const tangerineArr = [];
     
     for (let [key, value] of map) {
-        if (value >= k) return 1
-        temp.push([key, value])
+        tangerineArr.push([key, value])
     }
     
-    temp.sort((a, b) => b[1] - a[1])
+    tangerineArr.sort((a, b) => b[1] - a[1])
     
-    temp.forEach((item) => {
-        k -= item[1];
-        if (k <= 0) return answer
+    for (let i = 0; i < tangerineArr.length && k > 0; i++) {
+        k -= tangerineArr[i][1]
         answer++
-    })
+    }
     
-    return answer
+    return answer;
 }
