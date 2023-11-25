@@ -1,5 +1,4 @@
 function solution(cacheSize, cities) {
-    if (cacheSize === 0) return cities.length * 5
     let answer = 0;
     const lowerCities = cities.map(city => city.toLowerCase());
     const cache = Array.from({ length: cacheSize }, () => 0);
@@ -7,7 +6,7 @@ function solution(cacheSize, cities) {
     lowerCities.forEach(city => {
         let index = -1;
         
-        for (let i = 0; i < cache.length; i++) {
+        for (let i = 0; i < cacheSize; i++) {
             if (cache[i] === city) index = i    
         };
         
@@ -17,7 +16,7 @@ function solution(cacheSize, cities) {
             };
             
             answer++
-        } else {
+        } else if (index === -1) {
             for (let i = cache.length - 1; i > 0; i--) {
                 cache[i] = cache[i - 1];
             }
