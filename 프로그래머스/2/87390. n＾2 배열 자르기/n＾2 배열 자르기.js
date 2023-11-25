@@ -1,13 +1,16 @@
 function solution(n, left, right) {
-    let answer = []
+    const answer = [];
+    const index = [];
     
     for (let i = left; i <= right; i++) {
-        let row = Math.floor(i / n);
-        let col = i % n;
-        
-        if (row >= col) answer.push(row + 1)
-        else answer.push(col + 1)
+        const positionX = Math.floor(i / n);
+        const positionY = i % n;
+        index.push([positionX, positionY]);
     }
     
-    return answer
+    for (let [key, value] of index) {
+        answer.push(Math.max(key, value) + 1)
+    }
+
+    return answer;
 }
