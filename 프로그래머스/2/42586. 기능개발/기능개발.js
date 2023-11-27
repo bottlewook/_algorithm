@@ -1,25 +1,26 @@
 function solution(progresses, speeds) {
-    let days = [];
-    let answer = [];
+    const answer = [];
+    const days = [];
+    const n = progresses.length
     
-    for (let i = 0; i < progresses.length; i++) {
-        days.push(Math.ceil((100 - progresses[i]) / speeds[i]))
+    for (let i = 0; i < n; i++) {
+        days.push(Math.ceil((100- progresses[i]) / speeds[i]))
     }
     
-    let count = 1;
-    let max = days[0]
-    
-    for (let i = 1; i < days.length; i++) {
-        if (max >= days[i]) {
-            count++
-        }  else {
+    let max = days.at(0);
+    let count = 0
+
+    for (let i = 0; i < n; i++) {
+        if (days[i] > max) {
+            max = days[i];
             answer.push(count);
             count = 1;
-            max = days[i]
+        } else {
+            count++
         }
     }
     
     answer.push(count)
-    
+   
     return answer;
 }
