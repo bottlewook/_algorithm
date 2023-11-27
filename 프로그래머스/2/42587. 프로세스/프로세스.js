@@ -1,24 +1,23 @@
 function solution(priorities, location) {
-    var answer = 0;
+    const answer = [];
+    const queue = Array.from({ length: priorities.length }, () => 0);
     
-    const arr = priorities.map((priority, index) => {
-        return {
-            priority, index
-        }
-    })
+    for (let i = 0; i < queue.length; i++) {
+        queue[i] = [String.fromCharCode(i + 65) ,priorities[i]]
+    }; 
     
-    const queue = [];
-    
-    while (arr.length) {
-        const firstElement = arr.shift();
-        const hasHighPriority = arr.some(elem => elem.priority > firstElement.priority)
+    while (queue.length) {
+        const value = queue.shift();
         
-        if (hasHighPriority) {
-            arr.push(firstElement)
-        } else {
-            queue.push(firstElement)
+        let flag = 1;
+        for (let i = 0; i < queue.length; i++) {
+            if (value[1] < queue[i][1]) flag = 0;
         }
+        if (flag) answer.push(value)
+        else queue.push(value)
     }
     
-    return queue.findIndex(item => item.index === location) + 1
+    for (let i = 0; i < answer.length; i++) {
+        if (location === answer[i][0].charCodeAt() - 65) return i + 1
+    }
 }
