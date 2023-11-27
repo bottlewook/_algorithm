@@ -1,27 +1,25 @@
 function solution(s) {
-    let arr = [];
-    let answer = [];
-    
-    arr = s.replace(/[{}]/g, '').split(',').map(item => Number(item))
-    
-    
+    const answer = [];
+    const arr = s.replace(/[{}]/g, '').split(',').map(item => Number(item))
+
     const map = new Map();
     
     for (let x of arr) {
-        if (map.has(x)) {
-            map.set(x, map.get(x) + 1)
-        } else {
-            map.set(x, 1)
-        }
+        if (map.has(x)) map.set(x, map.get(x) + 1);
+        else map.set(x, 1);
     }
     
-    let newArr = [];
+    const temp = [];
     
     for (let [key, value] of map) {
-        newArr.push([key, value])
+        temp.push([key, value])
     }
     
-    newArr.sort((a, b) => b[1] - a[1]);
-    answer = newArr.map(item => item[0])
+    temp.sort((a, b) => b[1] - a[1]);
+    
+    for (let [a, b] of temp) {
+        answer.push(a)
+    }
+    
     return answer
 }
