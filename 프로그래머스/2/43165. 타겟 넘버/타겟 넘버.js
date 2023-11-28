@@ -3,14 +3,14 @@ function solution(numbers, target) {
     
     function DFS(level, sum) {
         if (level === numbers.length) {
-            if (sum === target) answer++
-        } else {
-            DFS(level + 1, sum + numbers[level])
-            DFS(level + 1, sum - numbers[level])
+            if (sum === target) answer++;
         }
-    }
+        else {
+            DFS(level + 1, sum + numbers[level]) 
+            DFS(level + 1, sum - numbers[level])    
+        }
+    };
     
     DFS(0, 0)
-    
-    return answer;
+    return answer
 }
