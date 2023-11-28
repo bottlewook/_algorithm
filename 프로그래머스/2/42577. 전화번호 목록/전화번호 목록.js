@@ -1,6 +1,10 @@
 function solution(phone_book) {
-  phone_book.sort();
-  const boolean = phone_book.some((book, index, arr) => arr[index + 1]?.indexOf(book) === 0)
-
-  return !boolean
+    let answer = true;
+    phone_book.sort()
+    
+    for (let i = 0; i < phone_book.length - 1; i++) {
+        if (phone_book[i + 1].startsWith(phone_book[i])) return false
+    }
+    
+    return answer;
 }
