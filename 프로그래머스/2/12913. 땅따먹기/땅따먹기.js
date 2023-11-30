@@ -1,25 +1,23 @@
 function solution(land) {
-    var answer = 0;
-    let dp = Array.from(Array(land.length), () => Array(land[0].length).fill(0))
-
-    for (let i = 0; i < land[0].length; i++) {
-        dp[0][i] = land[0][i]
-    }
+    const dp = Array.from(Array(land.length), () => Array(land[0].length).fill(0));
+    dp[0].forEach((item, index) => {
+        dp[0][index] = land[0][index]
+    })
     
-    for (let row = 1; row < land.length; row++) {
-        for (let col = 0; col < land[0].length; col++) {
+    for (let rowIndex = 1; rowIndex < land.length; rowIndex++) {
+        for (let colIndex = 0; colIndex < land[0].length; colIndex++) {
             let plusNum = 1;
-            let maxValue = 0;
-            let temp;
+            let max = 0;
+           
             while (plusNum < 4) {
-                temp = (col + plusNum) % 4; // 중복을 제외한 열 구하기
-                maxValue = Math.max(maxValue, dp[row - 1][temp])
+                let nextColIndex = (colIndex + plusNum) % 4;
+                max = Math.max(max, dp[rowIndex - 1][nextColIndex]);
                 plusNum++
             }
             
-            dp[row][col] = maxValue + land[row][col];
+            dp[rowIndex][colIndex] = max + land[rowIndex][colIndex]
         }
     }
-    console.log(dp)
-    return Math.max(...dp[land.length - 1]);
+    
+    return Math.max(...dp.at(-1))
 }
