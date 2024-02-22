@@ -1,10 +1,8 @@
 function solution(n) {
-    var answer = 0;
-
-    while (n) {
-        answer += n % 10;
-        n  = Math.floor(n / 10);
-    }
-
-    return answer;
+  const arr = String(n)
+  let answer = 0;
+  for (let x of arr) {
+      answer += Number(x)
+  }
+  return answer
 }
