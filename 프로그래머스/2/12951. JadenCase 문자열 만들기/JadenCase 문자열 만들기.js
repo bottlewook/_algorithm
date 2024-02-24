@@ -1,10 +1,14 @@
 function solution(s) {
-    let answer = '';
-    
-    for (let i = 0; i < s.length; i++) {
-        if (i === 0 || s[i - 1] === " ") answer += s[i].toUpperCase();
-        else answer += s[i].toLowerCase();
-    };
-    
-    return answer;
+    const answer = [];
+    const temp = s.split(' ');
+    for (let x of temp) {
+        let str = ''
+        for (let i = 0; i < x.length; i++) {
+            if (i === 0 && isNaN(x[i])) str += x[i].toUpperCase()
+            else if (!isNaN(x[i])) str += x[i]
+            else str += x[i].toLowerCase()
+        }
+        answer.push(str)
+    }
+    return answer.join(' ')
 }
