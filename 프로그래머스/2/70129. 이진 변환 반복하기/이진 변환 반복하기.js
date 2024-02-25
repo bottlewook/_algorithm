@@ -5,13 +5,12 @@ function solution(s) {
     while (s !== '1') {
         count++
         let temp = ''
-        for (let i = 0; i < s.length; i++) {
-             if (s[i] === '0') deleteZero++;
-             else temp += '1' 
+        for (let x of s) {
+            if (x === '0') deleteZero++
+            else temp += '1'
         }
-        
-        s = temp.length.toString(2)
+        s = (temp.length).toString(2)
     }
     
-    return [count, deleteZero];
+    return [count, deleteZero]
 }
