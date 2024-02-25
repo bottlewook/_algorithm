@@ -1,9 +1,9 @@
 function solution(arr) {
-    var answer = [];
-    for(let x of arr) {
-        if(x !== answer[answer.length - 1]) {
-            answer.push(x)
+    var stack = [];
+    for (let x of arr) {
+        if (stack[stack.length - 1] !== x) {
+            stack.push(x)
         }
     }
-    return answer;
+    return stack
 }
