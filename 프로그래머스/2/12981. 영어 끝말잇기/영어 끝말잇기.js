@@ -1,16 +1,16 @@
 function solution(n, words) {
-    const answer = [0, 0];
-    const duplication = [];
-    const length = words.length;
-
-    let turn = 1;
-    duplication.push(words[0])
-    for (let i = 1; i < words.length; i++) {
-        if (i % n === 0) turn++
-        if (duplication.includes(words[i])) return [(i % n) + 1, turn]
-        duplication.push(words[i]);
-        if (words[i - 1].charAt(words[i - 1].length - 1) !== words[i].charAt(0)) return [(i % n) + 1, turn]
+    const set = new Set(); 
+    var answer = [];
+    for (let i = 0; i < words.length; i++) {
+        if (set.has(words[i])) {
+            return [i % n + 1, Math.floor(i / n) + 1]
+        } else {
+            set.add(words[i])
+            if (words[i + 1] != null && words[i].at(-1) !== words[i + 1].at(0)) {
+                return [(i + 1) % n + 1 , Math.floor((i + 1) / n) + 1]
+            }
+        }
     }
 
-    return answer;
+    return [0,0]
 }
