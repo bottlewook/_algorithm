@@ -1,17 +1,17 @@
 function solution(people, limit) {
     let answer = 0;
-    people.sort((a, b) => a - b);
-    let lt = 0;
-
-    for (let rt = people.length - 1; rt >= lt; rt--) {
-        if (people[lt] + people[rt] > limit) {
-            answer++
+    people.sort((a, b) => a - b)
+    let start = 0;
+    let end = people.length - 1;
+    
+    while (start <= end) {
+        if (people[start] + people[end] > limit) {
+            end--
+        } else {
+            start++
+            end--
         }
-        else {
-            answer++
-            lt++
-        }   
+        answer++
     }
-
     return answer;
 }
