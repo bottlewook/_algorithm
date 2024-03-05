@@ -1,13 +1,14 @@
 function solution(a, b, n) {
-    let getCola = 0;
-    let emptyCola = 0;
+    let totalColas = 0;
     
-    while (n >= a) {
-        getCola += Math.floor(n / a) * b
-        emptyCola = n % a + Math.floor(n / a) * b;
-        n = emptyCola
+    let emptyBottles = n;
+    
+    while (emptyBottles >= a) {
+        const exchangedColas = Math.floor(emptyBottles / a) * b;
+        totalColas += exchangedColas;
+        
+        emptyBottles = (emptyBottles % a) + exchangedColas;
     }
     
-    
-    return getCola;
+    return totalColas;
 }
