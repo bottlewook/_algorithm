@@ -1,32 +1,23 @@
 function solution(k, score) {
-    let answer = [];
-    let queue = [];
-    
-    for (let i = 0; i < k && answer.length < score.length; i++) {
-        queue.push(score[i])
-        answer.push(Math.min(...queue))
+    const answer = [];
+    const temp = [];
+    for (let i = 0; i < Math.min(k, score.length); i++) {
+        temp.push(score[i])
+        answer.push(Math.min(...temp))
     }
-    
-    queue.sort((a, b) => a - b);
-    
     for (let i = k; i < score.length; i++) {
-        let index = -1;
-        
-        for (let j = 0; j < queue.length; j++) {
-            if (queue[j] <= score[i]) index = j;
-        }
-        
-        if (index !== -1) {
-            for (let k = 0; k < index; k++) {
-                queue[k] = queue[k + 1];
+        temp.sort((a, b) => b - a);
+        let flag = 0
+        for (let j = 0; j < temp.length; j++) {
+            if (score[i] >= temp[j]) {
+                temp.splice(j, 0, score[i])
+                temp.pop()
+                answer.push(Math.min(...temp))
+                flag = 1
+                break
             }
-                
-            queue[index] = score[i];
-        } 
-        
-        
-        answer.push(Math.min(...queue))
+        }
+        if (flag === 0) answer.push(Math.min(...temp))
     }
-    
     return answer;
 }
