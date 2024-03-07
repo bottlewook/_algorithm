@@ -1,31 +1,13 @@
-function shiftArray(arr) {
-    let temp = arr[0];
-    
-    for (let i = 0; i < arr.length - 1; i++) {
-        arr[i] = arr[i + 1];
-    }
-    
-    arr[arr.length - 1] = temp;
-    
-    return arr
-}
-
 function solution(elements) {
-    const answer = new Set(elements);
-    const array = [...elements];
-    
-    let count = 1
-    
-    while (count < elements.length) {
-        shiftArray(array);
-        
-        for (let i = 0; i < elements.length; i++) {
-            elements[i] += array[i]
-            answer.add(elements[i])
+    const arr = [...elements]
+    const set = new Set(elements);
+    for (let i = 1; i < elements.length; i++) {
+        const temp = elements.shift();
+        elements.push(temp)
+        for (let j = 0; j < elements.length; j++) {
+            arr[j] = arr[j] + elements[j]
         }
-        
-        count++
+        for (let x of arr) set.add(x)
     }
-    
-    return answer.size
+    return set.size
 }
