@@ -1,25 +1,20 @@
 function solution(want, number, discount) {
-    var answer = 0;
-    let obj = {};
-    let sum = number.reduce((a, b) => a + b, 0)
-    
+    let answer = 0;
+    const obj = {};
     for (let i = 0; i < want.length; i++) {
         obj[want[i]] = number[i]
     }
     
-    for (let i = 0; i <= discount.length - sum; i++) {
-        const temp = { ...obj };
-        for (let j = i; j < i + sum; j++) {
-            if ((temp[discount[j]])) temp[discount[j]]--
+    for (let i = 0; i <= discount.length - 10; i++) {
+        const temp = {...obj};
+        for (let j = i; j < 10 + i; j++) {
+            if (temp[discount[j]] > 0) temp[discount[j]]--
+            else break;
         }
-        
         let flag = 1;
-        
-        for (let value of Object.values(temp)) {
-            if (value > 0) {
-                flag = 0;
-                break
-            }
+        const a = Object.values(temp)
+        for (let x of a) {
+            if (x !== 0) flag = 0
         }
         if (flag) answer++
     }
