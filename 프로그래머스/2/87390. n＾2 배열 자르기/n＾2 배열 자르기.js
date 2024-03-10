@@ -1,16 +1,9 @@
 function solution(n, left, right) {
     const answer = [];
-    const index = [];
-    
     for (let i = left; i <= right; i++) {
-        const positionX = Math.floor(i / n);
-        const positionY = i % n;
-        index.push([positionX, positionY]);
+        const x = Math.floor(i / n);
+        const y = i % n;
+        answer.push(Math.max(x, y) + 1)
     }
-    
-    for (let [key, value] of index) {
-        answer.push(Math.max(key, value) + 1)
-    }
-
     return answer;
 }
