@@ -1,25 +1,25 @@
-function hIndex(arr, number) {
-    let check = 0;
-    
-    for (i = 0; i < arr.length; i++) {
-        if (number <= arr[i]) check++
+function find(target, arr) {
+    let count = 0;
+    for (let x of arr) {
+        if (x >= target) count++
     }
     
-    return check >= number
+    return target <= count 
 }
 
 function solution(citations) {
     let answer = 0;
-    let lt = 0;
-    let rt = Math.max(...citations);
+    let start = 0;
+    let end = citations.length;
     
-    while (lt <= rt) {
-        let mid = Math.floor((lt + rt) / 2);
-        if (hIndex(citations, mid)) {
-            answer = Math.max(mid, answer);
-            lt = mid + 1
-        } else rt = mid - 1
+    while (start <= end) {
+        let mid = Math.floor((start + end) / 2)
+        if (find(mid, citations)) {
+            answer = Math.max(mid, answer)
+            start = mid + 1
+        } else {
+            end = mid - 1
+        }
     }
-    
     return answer;
 }
