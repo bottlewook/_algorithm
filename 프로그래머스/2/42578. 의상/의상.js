@@ -1,14 +1,13 @@
 function solution(clothes) {
     let answer = 1;
     const map = new Map();
-    
-    for (let cloth of clothes) {
-        if (map.has(cloth[1])) map.set(cloth[1], map.get(cloth[1]) + 1);
-        else map.set(cloth[1], 1)
-    };
+    for (let [item, type] of clothes) {
+        if (!map.has(type)) map.set(type, new Set().add(item))
+        else map.set(type, map.get(type).add(item))
+    }
     
     for (let [key, value] of map) {
-        answer *= (value + 1)
+        answer *= (value.size + 1)
     }
     
     return answer - 1
