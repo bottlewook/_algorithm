@@ -1,23 +1,25 @@
 function solution(cacheSize, cities) {
-    if (cacheSize === 0) return cities.length * 5; // 캐시 크기가 0인 경우 처리
-
+    if (cacheSize === 0) return cities.length * 5
     let answer = 0;
-    var cities = cities.map(item => item.toLowerCase());
-    const cache = [];
+    const cache = Array.from({ length: cacheSize }, () => 0);
+    cities = cities.map(city => city.toLowerCase());
     
-    for (let city of cities) {
-        const index = cache.indexOf(city);
-        if (index > -1) {
-            // 캐시 히트: 해당 도시를 캐시에서 제거하고 가장 앞에 추가
-            cache.splice(index, 1);
-            answer += 1;
-        } else {
-            // 캐시 미스: 캐시가 꽉 찼다면 가장 오래된 항목 제거
-            if (cache.length >= cacheSize) cache.pop();
+    cities.forEach((city) => {
+        let index = cache.indexOf(city)
+        
+        if (index === -1) {
+            for (let i = cacheSize - 1; i > 0; i--) {
+                cache[i] = cache[i - 1]
+            }
             answer += 5;
+        } else {
+            for (let i = index; i > 0; i--) {
+                cache[i] = cache[i - 1]
+            }
+            answer++
         }
-        cache.unshift(city); // 현재 도시를 캐시의 가장 앞에 추가
-    }
+        cache[0] = city
+    })
     
-    return answer;
+    return answer
 }
