@@ -13,11 +13,8 @@ function solution(answers) {
         if (three[i % three.length] === answers[i]) th++
     }
     const max = Math.max(o, t, th);
-    const temp = [o, t, th]
-    for (let i = 0; i < temp.length; i++) {
-        if (temp[i] === max) {
-            answer.push(i + 1)
-        }
-    }
+    if (o === max) answer.push(1)
+    if (t === max) answer.push(2)
+    if (th === max) answer.push(3)
     return answer;
 }
