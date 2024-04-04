@@ -10,9 +10,7 @@ for (let i = 1; i < input.length; i++) {
 let answer = 0;
 
 for (let i = arr.length - 1; i >= 0; i--) {
-  while (arr[i] <= target) {
-    answer++
-    target -= arr[i]
-  }
+  answer += parseInt(target / arr[i])
+  target %= arr[i]
 }
 console.log(answer)
