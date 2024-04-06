@@ -1,28 +1,22 @@
 const fs = require("fs");
 const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-const input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n')
-const target = +input[0].split(' ')[1]
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n')
+
+const [n, m] = input[0].split(' ').map(Number)
 const arr = input[1].split(' ').map(Number)
 
-function solution(arr, target) {
-  let answer = 0;
-  let sum = 0;
-  let start = 0;
-  let end = 0;
+let count = 0;
+let intervalSum = 0;
+let end = 0;
 
-  while (end < arr.length) {
-    sum += arr[end];
-    
-    while (sum >= target) {
-      if (sum === target) answer++;
-      sum -= arr[start++];
-    }
-
-    end++;
+for (let start = 0; start < n; start++) {
+  while (intervalSum < m && end < n) {
+    intervalSum += arr[end]
+    end += 1
   }
-
-  console.log(answer);
+  if (intervalSum === m) count += 1
+  intervalSum -= arr[start]
 }
 
-solution(arr, target);
+console.log(count)
