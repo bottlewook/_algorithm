@@ -1,5 +1,3 @@
 function solution(s) {
-    const temp = s.split(' ').map(Number)
-    const [a, b] = [Math.min(...temp), Math.max(...temp)]
-    return `${a} ${b}`
+    return [Math.min(...s.split(' ').map(Number)), Math.max(...s.split(' ').map(Number))].join(' ')
 }
