@@ -1,8 +1,14 @@
-const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
+const fs = require("fs");
+const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-const arr = [];
-for (let i = 1; i < input.length; i++) {
-    arr.push(input[i])
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n')
+
+const [N, ...arr] = input.map(Number)
+arr.sort((a, b) => a - b);
+
+let answer = ''
+for (let x of arr) {
+  answer += x + '\n'
 }
-arr.sort((a, b) => a - b)
-for (let x of arr) console.log(x)
+
+console.log(answer.trim())
