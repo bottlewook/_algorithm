@@ -1,30 +1,30 @@
 const fs = require("fs");
 const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-const input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n')
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n')
 
-const length = input.length
-let time = []
+const N = Number(input[0]);
 
-for (let i = 1; i < length; i++) {
-  let temp = input[i].split(' ').map(Number)
-  time.push(temp)
+const arr = [];
+
+for (let i = 1; i <= N; i++) {
+  arr.push(input[i].split(' ').map(Number))
 }
 
-time.sort((a, b) => {
+arr.sort((a, b) => {
   if (a[1] === b[1]) return a[0] - b[0]
   else return a[1] - b[1]
 })
 
-let endTime = time[0][1];
-
 let answer = 1;
 
-for (let i = 1; i < time.length; i++) {
-  let startTime = time[i][0]
-  if (endTime <= startTime) {
-    endTime = time[i][1]
+let currentStartTime = arr[0][1]
+
+for (let i = 1; i < arr.length; i++) {
+  if (currentStartTime <= arr[i][0]) {
+    currentStartTime = arr[i][1]
     answer++
   }
 }
+
 console.log(answer)
