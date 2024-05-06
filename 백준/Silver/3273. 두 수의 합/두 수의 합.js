@@ -1,30 +1,29 @@
 const fs = require("fs");
 const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-const input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n')
-const target = +input[2]
-const arr = input[1].split(' ').map(Number)
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
 
-function solution(nums, target) {
-  let count = 0;
-  let left = 0;
-  let right = nums.length - 1;
+const N = Number(input[0]);
+const arr = input[1].split(' ').map(Number);
+const target = Number(input[2]);
 
-  nums.sort((a, b) => a - b);
+arr.sort((a, b) => a - b);
 
-  while (left < right) {
-    const sum = nums[left] + nums[right];
-    if (sum === target) {
-      count++;
-      left++;
-      right--;
-    } else if (sum < target) {
-      left++;
-    } else {
-      right--;
-    }
+let start = 0;
+let end = arr.length - 1;
+
+let answer = 0;
+
+while (start < end) {
+  let sum = arr[start] + arr[end];
+  if (sum === target) {
+    answer++
+    start++
+  } else if (sum < target) {
+    start++
+  } else {
+    end--
   }
-  console.log(count)
 }
 
-solution(arr, target);
+console.log(answer)
