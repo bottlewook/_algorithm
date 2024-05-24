@@ -1,23 +1,21 @@
 const fs = require("fs");
 const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-let input = fs.readFileSync(readFileSyncAddress).toString().trim()
-let target = Number(input)
-let flag = false
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
 
-let count = 0;
+let target = Number(input[0]);
 
-while (target >= 0) {
-  if (target === 0 || target % 5 === 0) {
-    count += parseInt(target / 5)
-    console.log(count)
-    flag = true
-    break
-  }
+let answer = 0;
+
+while (target > 0) {
+  if (target % 5 === 0) {
+    answer += target / 5;
+    break;
+  };
+
   target -= 3
-  count++
+  answer++
 }
 
-if (!flag) {
-  console.log(-1)
-}
+if (target < 0) console.log(-1)
+else console.log(answer)
