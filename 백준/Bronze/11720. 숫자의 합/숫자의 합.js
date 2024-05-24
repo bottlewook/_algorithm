@@ -1,12 +1,12 @@
-const fs = require('fs');
-const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+const fs = require("fs");
+const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-const arr = input[1].split('').map(item => Number(item));
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
 
-let sum = 0;
+const string = input[1]
 
-for (let x of arr) {
-    sum += x
-}
+let answer = 0;
 
-console.log(sum)
+for (let x of string) answer += +x
+
+console.log(answer)
