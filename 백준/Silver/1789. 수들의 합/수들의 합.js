@@ -1,14 +1,24 @@
 const fs = require("fs");
 const readFileSyncAddress = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
-let input = fs.readFileSync(readFileSyncAddress).toString().trim()
-let target = Number(input)
-let minus = 1;
-let count = 0;
-while (target >= 0) {
-  target -= minus
-  minus++
-  count++
+let input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
+
+let num = Number(input[0]);
+
+let answer = 0;
+
+let idx = 1;
+let sum = 0;
+let flag = 0;
+
+while (sum <= num) {
+  if (sum === num) {
+    flag = 1
+    break
+  }
+  sum += idx
+  idx++
+  answer++
 }
 
-console.log(count - 1)
+console.log(flag ? answer : answer - 1)
